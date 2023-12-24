@@ -1,0 +1,46 @@
+file = open("text.txt", 'r')
+
+total_id_fake = []
+total_id = []
+total_id_real = []
+games = []
+for line in file:
+    appending = line[line.index(":") + 2:len(line)]
+    appending.split(": ")
+    games.append(appending)
+
+for i in games:
+    i_split = i.split("; ")
+    index = games.index(i)
+    games[index] = i_split
+for row in games:
+    number_row = games.index(row)
+    row_length = 0
+    for each in row:
+        red = 0
+        green = 0
+        blue = 0
+        split_each = each.split(", ")
+        for e in split_each:
+            if "red" in e:
+                number = int(e[0:e.index("red")])
+                red += number
+            elif "green" in e:
+                number = int(e[0:e.index("green")])
+                green += number
+            elif "blue" in e:
+                number = int(e[0:e.index("blue")])
+                blue += number
+        if red <= 12 and green <= 13 and blue <= 14:
+            row_length += 1
+    if row_length == len(row):
+        total_id.append(number_row + 1)
+
+for i in total_id:
+    if i not in total_id_real:
+        total_id_real.append(i)
+counter = 0
+for i in total_id_real:
+    counter += int(i)
+print("total: ", counter)
+file.close()
